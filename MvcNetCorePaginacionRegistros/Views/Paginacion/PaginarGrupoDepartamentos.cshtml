@@ -39,11 +39,11 @@
                 <td>@item.Nombre</td>
                 <td>@item.Localidad</td>
                 <td>
-                    <a class="btn btn-primary"
-                       asp-controller="Paginacion"
-                       asp-action="EmpleadosRegistroDepartamento"
-                       asp-route-idDepartamento="@item.IdDepartamento">
-                        Ver Empleados
+                    <a asp-controller="Paginacion"
+                       asp-action="Details"
+                       asp-route-id="@item.IdDepartamento"
+                       class="btn btn-info">
+                        Details
                     </a>
                 </td>
             </tr>

@@ -13,6 +13,49 @@ namespace MvcNetCorePaginacionRegistros.Controllers
         {
             this.repo = repo;
         }
+        public async Task<IActionResult> Details(int id, int posicion)
+        {
+            if (posicion < 1)
+            {
+                posicion = 1; // Corregir posiciones inválidas
+            }
+
+            Departamento departamento = await this.repo.FindDepartamento(id);
+            Empleado empleado = await this.repo.GetEmpleadoDepartamento(posicion, id);
+
+            if (empleado == null)
+            {
+                TempData["Mensaje"] = "No hay empleados en esta posición.";
+                return RedirectToAction("PaginarGrupoDepartamentos");
+            }
+
+            ModelDepartamentoEmpleados departamentoEmpleado = new ModelDepartamentoEmpleados()
+            {
+                Empleado = empleado,
+                Departamento = departamento
+            };
+
+            int numRegistros = await this.repo.GetNumeroRegistros(id);
+            ViewData["REGISTROS"] = numRegistros;
+
+            int siguiente = posicion + 1;
+            if (siguiente > numRegistros)
+            {
+                siguiente = numRegistros;
+            }
+
+            int anterior = posicion - 1;
+            if (anterior < 1)
+            {
+                anterior = 1;
+            }
+
+            ViewData["ULTIMO"] = numRegistros;
+            ViewData["SIGUIENTE"] = siguiente;
+            ViewData["ANTERIOR"] = anterior;
+
+            return View(departamentoEmpleado);
+        }
 
         public async Task<IActionResult>
             EmpleadosOficioOut(int? posicion, string oficio)

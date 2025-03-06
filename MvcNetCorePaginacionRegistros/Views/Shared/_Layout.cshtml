@@ -23,23 +23,42 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarRegistroVistaDepartamento">Paginar Registro Vista</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoVistaDepartamento">Paginar Grupo Vista</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoDepartamentos">Paginar Grupo Departamentos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados">Paginar Empleados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficio">Empleados Oficio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficioOut">Empleados Oficio Out</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Paginación
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarRegistroVistaDepartamento">
+                                        Paginar Registro Vista
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoVistaDepartamento">
+                                        Paginar Grupo Vista
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoDepartamentos">
+                                        Paginar Grupo Departamentos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="PaginarGrupoEmpleados">
+                                        Paginar Empleados
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficio">
+                                        Empleados Oficio
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Paginacion" asp-action="EmpleadosOficioOut">
+                                        Empleados Oficio Out
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>

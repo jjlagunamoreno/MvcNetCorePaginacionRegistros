@@ -82,7 +82,40 @@ namespace MvcNetCorePaginacionRegistros.Repositories
             this.context = context;
         }
 
+        public async Task<Departamento> FindDepartamento(int idDepartamento)
+        {
+            var consulta = from datos in this.context.Departamentos
+                           where datos.IdDepartamento == idDepartamento
+                           select datos;
+            return await consulta.FirstOrDefaultAsync();
+        }
 
+        public async Task<Empleado> GetEmpleadoDepartamento(int posicion, int idDepartamento)
+        {
+            if (posicion < 1)
+            {
+                posicion = 1; // Asegurar que siempre inicie desde 1
+            }
+
+            string sql = "EXEC SP_EMPLEADOS_DEPARTAMENTO @posicion, @idDepartamento";
+            SqlParameter pamPosicion = new SqlParameter("@posicion", posicion);
+            SqlParameter pamIdDepartamento = new SqlParameter("@iddepartamento", idDepartamento);
+
+            List<Empleado> consulta =
+                 await this.context.Empleados.FromSqlRaw(sql, pamPosicion, pamIdDepartamento).ToListAsync();
+
+            return consulta.FirstOrDefault(); // Devuelve null si no hay empleados
+        }
+
+
+        public async Task<int> GetNumeroRegistros(int idDepartamento)
+        {
+            var consulta = from datos in this.context.Empleados
+                           where datos.IdDepartamento == idDepartamento
+                           select datos;
+
+            return await consulta.CountAsync();
+        }
 
         public async Task<ModelEmpleadosOficio>
             GetEmpleadosOficioOutAsync(int posicion, string oficio)
