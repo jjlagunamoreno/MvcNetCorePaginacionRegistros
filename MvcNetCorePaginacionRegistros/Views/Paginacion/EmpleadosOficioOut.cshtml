@@ -1,0 +1,71 @@
+﻿@model ModelEmpleadosOficio
+
+@{
+    ViewData["Title"] = "PaginarEmpleadosOficioOut";
+}
+
+@{
+    int numRegistros = 0;
+    int numPagina = 1;
+    string oficio = "";
+    if (ViewData["REGISTROS"] != null)
+    {
+        numRegistros = (int)ViewData["REGISTROS"];
+        oficio = ViewData["OFICIO"].ToString();
+    }
+}
+
+<h1 style="color:mediumspringgreen">Paginar Empleados Oficio Out</h1>
+
+<form method="post">
+    <label>Introduzca oficio: </label>
+    <input type="text" name="oficio" class="form-control" />
+    <button type="submit" class="btn btn-info">Buscar empleados</button>
+</form>
+
+@if (Model != null)
+{
+    <ul class="list-group list-group-horizontal">
+        @for (int i = 1; i <= numRegistros; i += 2)
+        {
+            <li class="list-group-item list-group-item-warning">
+                <a asp-controller="Paginacion"
+                   asp-action="EmpleadosOficioOut"
+                   asp-route-posicion="@i"
+                   asp-route-oficio="@oficio">
+                    @numPagina
+                </a>
+            </li>
+            numPagina += 1;
+        }
+    </ul>
+
+    <hr />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>APELLIDO</th>
+                <th>OFICIO</th>
+                <th>SALARIO</th>
+                <th>DEPARTAMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Empleados)
+            {
+                <tr>
+                    <td>@item.IdEmpleado</td>
+                    <td>@item.Apellido</td>
+                    <td>@item.Oficio</td>
+                    <td>@item.Salario</td>
+                    <td>@item.IdDepartamento</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2 style="color:red">No hay empleados con el oficio @oficio</h2>
+}
