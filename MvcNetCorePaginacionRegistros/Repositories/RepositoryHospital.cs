@@ -32,6 +32,18 @@ namespace MvcNetCorePaginacionRegistros.Repositories
             return await this.context.VistDepartamentos.CountAsync();
         }
 
+        public async Task<List<VistDepartamento>>
+            GetGrupoVistaDepartamentosAsync(int posicion)
+        {
+            //select* from V_DEPARTAMENTOS_INDIVIDUAL
+            //where POSICION >= 1 and POSICIPN< (1 + 2)
+            var consulta = from datas in this.context.VistDepartamentos
+                           where datas.Posicion >= posicion
+                            && datas.Posicion < (posicion + 2)
+                           select datas;
+            return await consulta.ToListAsync();
+        }
+
         public async Task<VistDepartamento>
             GetVistaDepartamentoAsync(int posicion)
         {
